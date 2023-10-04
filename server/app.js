@@ -7,7 +7,6 @@ const cors = require("cors");
 const { User } = require("./models");
 const { comparePassword } = require("./helpers/bcrypt");
 const { generateToken } = require("./helpers/jwt");
-const { OAuth2Client } = require("google-auth-library");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -71,13 +70,6 @@ app.post("/login", async (req, res) => {
     });
   }
 });
-
-//? flow google login di server
-// 1. kita akan mencoba decode access token dari google
-// 2. kita akan mencari di db apakah user sudah terdaftar/belum?
-// 2a. Kalau user belum terdaftar, maka kita daftarin
-// 2b. kalau user sudah terdaftar, maka lanjut
-// 3. generate access_token dari server kita sendiri
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
